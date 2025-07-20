@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
+      CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+      CYPRESS_LOGIN_URL: ${{ secrets.CYPRESS_LOGIN_URL }}
       TEST_ENV: prod
 
     steps:
