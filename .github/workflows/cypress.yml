@@ -10,6 +10,9 @@ jobs:
   cypress:
     runs-on: ubuntu-latest
 
+    env:
+      TEST_ENV: prod
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
