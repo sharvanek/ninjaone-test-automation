@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      CYPRESS_BASE_URL: ${{ secrets.CYPRESS_BASE_URL }}
       CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
       CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
       CYPRESS_LOGIN_URL: ${{ secrets.CYPRESS_LOGIN_URL }}
@@ -30,3 +31,11 @@ jobs:
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
+
+
+      - name: Upload Cypress screenshots
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
