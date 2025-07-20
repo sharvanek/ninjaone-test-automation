@@ -5,7 +5,7 @@ describe('Login Success - Valid Credentials', () => {
 
     // Fill in login form
     // Select input by id as no data-testid attributes
-    cy.get('#email').type('your-email@example.com')
+    cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type(Cypress.env('password'))
 
     // Click the login button
@@ -43,7 +43,7 @@ describe('Login Failure Scenarios', () => {
     cy.visit(Cypress.env('loginUrl'))
 
     // Fill in the login form 
-    cy.get('#email').type('your-email@example.com') // valid
+    cy.get('#email').type(Cypress.env('username')) // valid
     cy.get('#password').type('wrongPassword123')    // invalid
 
     // Submit the form
