@@ -76,6 +76,25 @@ describe('Login Failure Scenarios', () => {
     cy.url().should('include', '/login')
   })
 
+  it('does not log in when email format is invalid but password is valid', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Fill in the login form
+    cy.get('#email').clear().type('not-an-email-format')      // invalid email
+    cy.get('#password').clear().type(Cypress.env('password')) // valid password
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Ensure we’re still on the login page
+    cy.url().should('include', '/login')
+  })
+
   it('shows validation styling and message when login fields are blank', () => {
     // Visit the login page
     cy.visit(Cypress.env('loginUrl'))
