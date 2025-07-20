@@ -1,7 +1,7 @@
 describe('Login Success - Valid Credentials', () => {
   it('logs in successfully with valid credentials', () => {
     // Visit the login page
-    cy.visit(Cypress.env('login_url'))
+    cy.visit(Cypress.env('loginUrl'))
 
     // Fill in login form
     // Select input by id as no data-testid attributes
@@ -21,7 +21,7 @@ describe('Login Success - Valid Credentials', () => {
 describe('Login Failure Scenarios', () => {
   it('does not log in with completely invalid credentials', () => {
     // Visit the login page
-    cy.visit(Cypress.env('login_url'))
+    cy.visit(Cypress.env('loginUrl'))
 
     // Fill in the login form with invalid credentials
     cy.get('#email').type('invalid-user@example.com')
@@ -40,7 +40,7 @@ describe('Login Failure Scenarios', () => {
 
   it('does not log in with valid email and invalid password', () => {
     // Visit the login page
-    cy.visit(Cypress.env('login_url'))
+    cy.visit(Cypress.env('loginUrl'))
 
     // Fill in the login form 
     cy.get('#email').type('your-email@example.com') // valid
@@ -59,7 +59,7 @@ describe('Login Failure Scenarios', () => {
 
   it('does not log in with invalid email and valid password', () => {
     // Visit the login page
-    cy.visit(Cypress.env('login_url'))
+    cy.visit(Cypress.env('loginUrl'))
 
     // Fill in the login form
     cy.get('#email').type('invalid-user@example.com') // invalid
@@ -78,7 +78,7 @@ describe('Login Failure Scenarios', () => {
 
   it('shows validation styling and message when login fields are blank', () => {
     // Visit the login page
-    cy.visit(Cypress.env('login_url'))
+    cy.visit(Cypress.env('loginUrl'))
 
     // Submit the form without filling email and password
     cy.get('button[type="submit"]').click()

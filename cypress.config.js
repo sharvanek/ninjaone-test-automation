@@ -38,7 +38,8 @@ module.exports = defineConfig({
       // Override or supplement config with GitHub Secrets (env vars)
       // These come from GitHub Actions secrets injected as env variables
       const secretEnv = {
-        baseUrl: process.env.CYPRESS_LOGIN_URL || envConfig.baseUrl,
+        baseUrl: process.env.CYPRESS_BASE_URL || envConfig.baseUrl,
+        loginUrl: process.env.CYPRESS_LOGIN_URL || envConfig.LOGIN_URL,
         username: process.env.CYPRESS_USERNAME || envConfig.username,
         password: process.env.CYPRESS_PASSWORD || envConfig.password,
       }
