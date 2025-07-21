@@ -49,3 +49,20 @@ These are injected automatically in GitHub Actions using repository secrets.
 ├── cypress.config.js # Cypress config with dynamic env loader
 └── README.md # Project documentation
 ```
+
+## 🚀 Running Tests Locally
+
+1. Install Dependencies
+```bash
+npm install
+```
+
+2. Run Tests Using Dev Environment
+```bash
+TEST_ENV=dev npx cypress run
+```
+
+Or open Cypress UI to run/debug interactively:
+```bash
+npx cypress open
+```
