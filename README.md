@@ -66,3 +66,19 @@ Or open Cypress UI to run/debug interactively:
 ```bash
 npx cypress open
 ```
+
+## 🤖 CI with GitHub Actions
+
+Tests are run automatically on:
+
+- Push to the `main` branch  
+- Pull Requests
+
+### 🧭 Manual Trigger
+
+You can also manually trigger the workflow from the GitHub Actions UI:
+
+1. Go to the **Actions** tab of the repository.
+2. Select the **Cypress** workflow.
+3. Click the **Run workflow** button.
+4. Choose a branch and click **Run** to start the tests.
