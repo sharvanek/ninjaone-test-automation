@@ -3,22 +3,22 @@ describe('Login Success - Valid Credentials', () => {
     // Visit the login page
     cy.visit(Cypress.env('loginUrl'))
 
-    // Fill in login form
+    // Enter valid credentials (from environment variables)
     // Select input by id as no data-testid attributes
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type(Cypress.env('password'))
 
-    // Click the login button
+    // Submit the login form
     // Select Sign In button by type as no data-testid attributes
     cy.get('button[type="submit"]').click()
 
-    // Assert that login was successful
+    // Assert successful login — update as needed based on actual app behavior
     cy.url().should('include', '/dashboard')
     cy.contains('Welcome').should('be.visible')
   })
 })
 
-describe('Login Failure Scenarios', () => {
+describe('Login Failure - Invalid Credentials', () => {
   it('does not log in with completely invalid credentials', () => {
     // Visit the login page
     cy.visit(Cypress.env('loginUrl'))
@@ -31,10 +31,11 @@ describe('Login Failure Scenarios', () => {
     cy.get('button[type="submit"]').click()
 
     // Assert that login fails
+    // Expect a generic login error message
     // Partial match to avoid brittleness if message copy changes slightly
     cy.contains('Invalid username/password').should('be.visible')
 
-    // Ensure we’re still on the login page
+    // Confirm the user is not redirected away from the login page
     cy.url().should('include', '/login')
   })
 
@@ -50,10 +51,11 @@ describe('Login Failure Scenarios', () => {
     cy.get('button[type="submit"]').click()
 
     // Assert that login fails
+    // Expect a generic login error message
     // Partial match to avoid brittleness if message copy changes slightly
     cy.contains('Invalid username/password').should('be.visible')
 
-    // Ensure we’re still on the login page
+    // Confirm the user is not redirected away from the login page
     cy.url().should('include', '/login')
   })
 
@@ -69,14 +71,17 @@ describe('Login Failure Scenarios', () => {
     cy.get('button[type="submit"]').click()
 
     // Assert that login fails
+    // Expect a generic login error message
     // Partial match to avoid brittleness if message copy changes slightly
     cy.contains('Invalid username/password').should('be.visible')
 
-    // Ensure we’re still on the login page
+    // Confirm the user is not redirected away from the login page
     cy.url().should('include', '/login')
   })
+})
 
-  it('does not log in when email format is invalid but password is valid', () => {
+describe('Login Failure - Input Validation', () => {
+it('does not log in when email format is invalid but password is valid', () => {
     // Visit the login page
     cy.visit(Cypress.env('loginUrl'))
 
@@ -88,10 +93,11 @@ describe('Login Failure Scenarios', () => {
     cy.get('button[type="submit"]').click()
 
     // Assert that login fails
+    // Expect a generic login error message
     // Partial match to avoid brittleness if message copy changes slightly
     cy.contains('Invalid username/password').should('be.visible')
 
-    // Ensure we’re still on the login page
+    // Confirm the user is not redirected away from the login page
     cy.url().should('include', '/login')
   })
 
@@ -99,10 +105,10 @@ describe('Login Failure Scenarios', () => {
     // Visit the login page
     cy.visit(Cypress.env('loginUrl'))
 
-    // Submit the form without filling email and password
+    // Attempt to submit the form without entering credentials
     cy.get('button[type="submit"]').click()
 
-    // Assert that validation class appears
+    // Assert that validation styling is applied to both fields
     cy.get('#email')
       .parents('.form-group')
       .should('have.class', 'has-error')
@@ -110,12 +116,71 @@ describe('Login Failure Scenarios', () => {
     cy.get('#password')
       .parents('.form-group')
       .should('have.class', 'has-error')
-
-    // Check for error message too
+    
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
     cy.contains('Error during login').should('be.visible')
 
-    // Ensure we’re still on the login page
+    // Confirm the user is not redirected away from the login page
     cy.url().should('include', '/login')
   })
+})
 
+describe('Login Edge Cases - Long Inputs', () => {
+  it('should allow login with long but valid credentials', () => {
+    // Assumption:
+    // Many systems support usernames up to 64 chars and passwords up to 128.
+    // This test verifies that the app accepts and processes valid long inputs.
+    // In a real test suite, these credentials would match a known valid test user.
+
+    // Generate a long but valid email (~60 characters)
+    const longUsername = 'user_' + 'a'.repeat(50) + '@example.com'
+
+    // Generate a strong 128-character password (16 chars × 8)
+    const longPassword = 'SecureP@ss123!'.repeat(8)
+
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter long credentials
+    cy.get('#email').type(longUsername)
+    cy.get('#password').type(longPassword)
+
+    // Submit the login form
+    cy.get('button[type="submit"]').click()
+
+    // Assert successful login — update as needed based on actual app behavior
+    cy.url().should('include', '/dashboard')
+    cy.contains('Welcome').should('be.visible')
+  })
+
+  it('should reject login with excessively long credentials', () => {
+    // This test ensures the system gracefully rejects input that exceeds typical limits.
+    // Even if the frontend doesn't block long input, the backend should prevent login.
+
+    // Generate an overly long email (~300+ characters) to test rejection
+    const tooLongEmail = 'a'.repeat(300) + '@example.com'
+
+    // Generate an overly long password (300 characters)
+    const tooLongPassword = 'X'.repeat(300)
+
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Fill in the login form with excessive inputs
+    cy.get('#email').type(tooLongEmail)
+    cy.get('#password').type(tooLongPassword)
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user is not redirected away from the login page
+    cy.url().should('include', '/login')
+  })
 })
