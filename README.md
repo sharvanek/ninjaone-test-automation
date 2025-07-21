@@ -95,3 +95,22 @@ The test suite covers:
   - Excessively long input values for email and password
 - 🎨 Validation styling and error messages
 - 🧪 Edge cases around input length limits
+- Session persistence tests for "Keep me signed in" checkbox:
+  - User remains logged in after page reload when "Keep me signed in" is checked
+  - User remains logged in when revisiting the login page with "Keep me signed in" checked
+  - User is logged out when "Keep me signed in" is not checked and session cookies/local storage are cleared
+
+### ⚠️ Known Caveats and Considerations
+
+- Session persistence tests rely on Cypress behavior around cookies/local storage — simulating full browser close/open (e.g., new tab or browser restart) is limited within Cypress.
+- Human verification challenges (like CAPTCHAs) encountered during tests need manual intervention or advanced bypass solutions not covered here.
+
+### Notes on Credentials
+
+This test suite is prepared in advance of granted access to a valid account.
+
+- The login tests currently use hardcoded credentials (especially the password) as placeholders.
+- An account has been registered, but access is pending approval.
+- Once valid credentials are provided, tests should be updated to use environment variables
+  (e.g., `CYPRESS_USERNAME`, `CYPRESS_PASSWORD`) to improve security and ease of configuration.
+- This approach ensures the test suite remains ready for immediate use when access is granted.
