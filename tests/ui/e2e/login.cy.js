@@ -184,3 +184,84 @@ describe('Login Edge Cases - Long Inputs', () => {
     cy.url().should('include', '/login')
   })
 })
+
+describe('Login Session Persistence', () => {
+  it('keeps user logged in after page reload when "Keep me signed in" is checked', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid credentials (from environment variables)
+    cy.get('#email').type(Cypress.env('username'))
+    cy.get('#password').type(Cypress.env('password'))
+
+    // Enable "Keep me signed in" checkbox to persist session
+    cy.get('#staySignedIn').check()
+
+    // Submit the login form
+    cy.get('button[type="submit"]').click()
+
+    // Assert successful login — update as needed based on actual app behavior
+    cy.url().should('include', '/dashboard')
+
+    // Reload the page to simulate user refreshing browser
+    cy.reload()
+
+    // Confirm user is still logged in after page reload
+    cy.url().should('include', '/dashboard')
+    cy.contains('Welcome').should('be.visible')
+  })
+
+  it('keeps user logged in when revisiting login page if "Keep me signed in" is checked', () => {
+    // Visit login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid credentials (from environment variables)
+    cy.get('#email').type(Cypress.env('username'))
+    cy.get('#password').type(Cypress.env('password'))
+
+    // Enable "Keep me signed in" checkbox to persist session
+    cy.get('#staySignedIn').check()
+
+    // Submit the login form
+    cy.get('button[type="submit"]').click()
+
+    // Assert successful login — update as needed based on actual app behavior
+    cy.url().should('include', '/dashboard')
+
+    // Visit login URL again, simulating user navigating back to login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Confirm user remains logged in, redirected back to dashboard
+    cy.url().should('include', '/dashboard')
+    cy.contains('Welcome').should('be.visible')
+  })
+
+  it('logs out user when "Keep me signed in" is not checked and cookies cleared', () => {
+    // Visit login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid credentials (from environment variables)
+    cy.get('#email').type(Cypress.env('username'))
+    cy.get('#password').type(Cypress.env('password'))
+
+    // Ensure "Keep me signed in" is unchecked
+    cy.get('#staySignedIn').uncheck()
+
+    // Submit the login form
+    cy.get('button[type="submit"]').click()
+
+    // Assert successful login — update as needed based on actual app behavior
+    cy.url().should('include', '/dashboard')
+
+    // Clear cookies and local storage to simulate session expiration / browser close
+    cy.clearCookies()
+    cy.clearLocalStorage()
+
+    // Return to login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Confirm user is logged out and on the login screen
+    cy.url().should('include', '/login')
+    cy.contains('Login').should('be.visible')
+  })
+})
