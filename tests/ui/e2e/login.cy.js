@@ -16,6 +16,30 @@ describe('Login Success - Valid Credentials', () => {
     cy.url().should('include', '/dashboard')
     cy.contains('Welcome').should('be.visible')
   })
+
+  it('logs in successfully with a password containing lowercase, uppercase, numbers, and special characters', () => {
+    // NOTE: This test uses a hardcoded complex password string because
+    // while an account has been registered, access has not yet been granted.
+    // Once valid credentials are provided, update to use environment variables
+    // for better security and flexibility.
+
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid username/email (hardcoded here as placeholder)
+    cy.get('#email').type('test.user@example.com')
+
+    // Enter a complex password containing different character types
+    const complexPassword = 'P@ssw0rd123!'
+    cy.get('#password').type(complexPassword)
+
+    // Submit the login form
+    cy.get('button[type="submit"]').click()
+
+    // Assert successful login — update as needed based on actual app behavior
+    cy.url().should('include', '/dashboard')
+    cy.contains('Welcome').should('be.visible')
+  })
 })
 
 describe('Login Failure - Invalid Credentials', () => {
