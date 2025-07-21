@@ -95,7 +95,7 @@ The test suite covers:
   - Excessively long input values for email and password
 - 🎨 Validation styling and error messages
 - 🧪 Edge cases around input length limits
-- **Session persistence tests for "Keep me signed in" checkbox:**
+- Session persistence tests for "Keep me signed in" checkbox:
   - User remains logged in after page reload when "Keep me signed in" is checked
   - User remains logged in when revisiting the login page with "Keep me signed in" checked
   - User is logged out when "Keep me signed in" is not checked and session cookies/local storage are cleared
