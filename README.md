@@ -82,3 +82,16 @@ You can also manually trigger the workflow from the GitHub Actions UI:
 2. Select the **Cypress** workflow.
 3. Click the **Run workflow** button.
 4. Choose a branch and click **Run** to start the tests.
+
+## ✅ Test Coverage
+
+The test suite covers:
+
+- ✅ Successful login with valid credentials
+- ❌ Login failure scenarios including:
+  - Blank email/password fields
+  - Invalid email formats
+  - Incorrect username/password combinations
+  - Excessively long input values for email and password
+- 🎨 Validation styling and error messages
+- 🧪 Edge cases around input length limits
