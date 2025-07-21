@@ -337,6 +337,151 @@ it('does not log in when email format is invalid but password is valid', () => {
   })
 })
 
+describe('Password Format - Assumed Rejection Cases', () => {
+  it('rejects login with password shorter than 8 characters', () => {
+    // Assumption: System requires a minimum password length of 8 characters
+
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid credentials (from environment variables)
+    cy.get('#email').type(Cypress.env('username'))
+
+    // Enter a password that is too short (7 characters)
+    cy.get('#password').type('Short1!')
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user remains on the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('rejects login with password containing only lowercase letters', () => {
+    // Assumption: Password must include uppercase, numbers, and special characters
+
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid credentials (from environment variables)
+    cy.get('#email').type(Cypress.env('username'))
+
+    // Use only lowercase letters in password
+    cy.get('#password').type('onlylowercase')
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user remains on the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('rejects login with password containing only numbers', () => {
+    // Assumption: Numeric-only passwords are considered too weak
+    
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid credentials (from environment variables)
+    cy.get('#email').type(Cypress.env('username'))
+
+
+    // Use only digits in password
+    cy.get('#password').type('12345678')
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+    
+    // Confirm the user remains on the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('rejects login with password containing only special characters', () => {
+    // Assumption: Password must contain letters or digits in addition to symbols
+
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid credentials (from environment variables)
+    cy.get('#email').type(Cypress.env('username'))
+
+    // Use only special characters
+    cy.get('#password').type('!@#$%^&*()')
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user remains on the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('rejects login with password that includes emoji characters', () => {
+    // Assumption: Emojis/unicode characters are not accepted in passwords
+
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid credentials (from environment variables)
+    cy.get('#email').type(Cypress.env('username'))
+
+    // Include emoji character in password
+    cy.get('#password').type('P@ssword123🔒')
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+    
+    // Confirm the user remains on the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('rejects login with password that includes whitespace characters', () => {
+    // Assumption: Passwords with internal spaces may be rejected or normalized
+
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter valid credentials (from environment variables)
+    cy.get('#email').type(Cypress.env('username'))
+
+    // Include a space in the middle of the password
+    cy.get('#password').type('P@ss word1')
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user remains on the login page
+    cy.url().should('include', '/login')
+  })
+})
+
 describe('Login Edge Cases - Long Inputs', () => {
   it('should allow login with long but valid credentials', () => {
     // Assumption:
