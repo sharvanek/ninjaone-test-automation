@@ -149,6 +149,60 @@ it('does not log in when email format is invalid but password is valid', () => {
     // Confirm the user is not redirected away from the login page
     cy.url().should('include', '/login')
   })
+
+  it('shows validation styling and error message when email is blank but password is provided', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Leave email blank and type a valid password
+    cy.get('#password').type('SomeValidPassword123!')
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that validation styling appears on the email input container
+    cy.get('#email')
+      .parents('.form-group')
+      .should('have.class', 'has-error')
+
+    // Password field should not have validation error since it was filled
+    cy.get('#password')
+      .parents('.form-group')
+      .should('not.have.class', 'has-error')
+
+    // Assert that a generic error message appears
+    cy.contains('Error during login').should('be.visible')
+
+    // Confirm the user remains on the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('shows validation styling and error message when password is blank but email is provided', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Type a valid email and leave password blank
+    cy.get('#email').type('valid.user@example.com')
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that validation styling appears on the password input container
+    cy.get('#password')
+      .parents('.form-group')
+      .should('have.class', 'has-error')
+
+    // Email field should not have validation error since it was filled
+    cy.get('#email')
+      .parents('.form-group')
+      .should('not.have.class', 'has-error')
+
+    // Assert that a generic error message appears
+    cy.contains('Error during login').should('be.visible')
+
+    // Confirm the user remains on the login page
+    cy.url().should('include', '/login')
+  })
 })
 
 describe('Login Edge Cases - Long Inputs', () => {
@@ -287,5 +341,38 @@ describe('Login Session Persistence', () => {
     // Confirm user is logged out and on the login screen
     cy.url().should('include', '/login')
     cy.contains('Login').should('be.visible')
+  })
+})
+
+describe('Login Page Navigation Links', () => {
+  it('navigates to reset password page when clicking "Forgot your password?" link', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Click the link using href attribute selector
+    cy.get('a[href="#/resetPassword"]').click()
+
+    // Assert the URL includes the reset password path
+    cy.url().should('include', '/resetPassword')
+
+    // Optionally verify some element on the reset password page is visible
+    cy.contains('Send').should('be.visible')
+  })
+
+  it('opens the free trial signup page when clicking "Do not have an account?" link', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Get the link by its href attribute and check it opens in a new tab with correct rel attributes
+    cy.get('a[href="https://www.ninjaone.com/freetrialform/"]')
+      .should('have.attr', 'target', '_blank')   // Confirm it opens in a new tab
+      .and('have.attr', 'rel', 'nonopener noreferrer')
+
+    // Cypress can't control new browser tabs, so remove target attribute before clicking
+    // This forces the link to open in the same tab so Cypress can verify the URL
+    cy.get('a[href="https://www.ninjaone.com/freetrialform/"]').invoke('removeAttr', 'target').click()
+
+    // Assert that after clicking the link, the URL includes the expected external URL path
+    cy.url().should('include', '/freetrialform')
   })
 })
