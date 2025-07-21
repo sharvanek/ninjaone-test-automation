@@ -19,3 +19,14 @@ Create a file like `config/env.dev.json`:
   "username": "valid.user@example.com",
   "password": "SuperSecret123!"
 }
+
+### Environment Variable Overrides (CI-Friendly)
+
+You can override any of the above with environment variables:
+
+- `CYPRESS_BASE_URL`
+- `CYPRESS_LOGIN_URL`
+- `CYPRESS_USERNAME`
+- `CYPRESS_PASSWORD`
+
+These are injected automatically in GitHub Actions using repository secrets.
