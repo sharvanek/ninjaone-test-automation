@@ -18,7 +18,7 @@ Create a file like `config/env.dev.json`:
   "LOGIN_URL": "https://example.com/auth/#/login",
   "username": "valid.user@example.com",
   "password": "SuperSecret123!"
-}
+} ```
 
 ### Environment Variable Overrides (CI-Friendly)
 
