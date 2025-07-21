@@ -101,6 +101,9 @@ The test suite covers:
   - User remains logged in after page reload when "Keep me signed in" is checked
   - User remains logged in when revisiting the login page with "Keep me signed in" checked
   - User is logged out when "Keep me signed in" is not checked and session cookies/local storage are cleared
+- Navigation tests for login page links:
+  - Clicking Forgot your password? routes to the password reset page
+  - Clicking Do not have an account? opens the free trial signup page in a new tab (handled in the same tab for testability)
 
 ### ⚠️ Known Caveats and Considerations
 
