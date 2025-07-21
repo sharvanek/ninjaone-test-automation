@@ -33,7 +33,7 @@ You can override any of the above with environment variables:
 These are injected automatically in GitHub Actions using repository secrets.
 
 ## 📁 Project Structure
-
+```
 .
 ├── config/ # Environment JSON files (e.g., env.dev.json)
 ├── cypress/
@@ -48,3 +48,4 @@ These are injected automatically in GitHub Actions using repository secrets.
 │ └── cypress.yml # GitHub Actions workflow for running tests
 ├── cypress.config.js # Cypress config with dynamic env loader
 └── README.md # Project documentation
+```
