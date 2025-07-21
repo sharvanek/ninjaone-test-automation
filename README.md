@@ -94,7 +94,7 @@ The test suite covers:
   - Incorrect username/password combinations
   - Excessively long input values for email and password
 - Login with complex passwords
-  - Passwords containing lowercase, uppercase, numbers, and special characte
+  - Passwords containing lowercase, uppercase, numbers, and special characters
 - 🎨 Validation styling and error messages
 - 🧪 Edge cases around input length limits
 - Session persistence tests for "Keep me signed in" checkbox:
