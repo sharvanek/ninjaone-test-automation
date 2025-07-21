@@ -125,6 +125,138 @@ it('does not log in when email format is invalid but password is valid', () => {
     cy.url().should('include', '/login')
   })
 
+  it('does not log in when email is missing @ symbol', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter an email missing the '@' symbol
+    cy.get('#email').clear().type('userexample.com')
+
+    // Enter a valid password
+    cy.get('#password').clear().type(Cypress.env('password'))
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user is not redirected away from the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('does not log in when email is missing domain', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Input email missing the domain part
+    cy.get('#email').clear().type('user@')
+
+    // Input a valid password
+    cy.get('#password').clear().type(Cypress.env('password'))
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user is not redirected away from the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('does not log in when email is missing username', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter email with no username before '@'
+    cy.get('#email').clear().type('@example.com')
+
+    // Enter valid password
+    cy.get('#password').clear().type(Cypress.env('password'))
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user is not redirected away from the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('does not log in when email contains spaces', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Input email containing spaces
+    cy.get('#email').clear().type('user @example.com')
+
+    // Input valid password
+    cy.get('#password').clear().type(Cypress.env('password'))
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user is not redirected away from the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('does not log in when email contains invalid special characters', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter email with invalid special characters
+    cy.get('#email').clear().type('user!@example.com')
+
+    // Enter valid password
+    cy.get('#password').clear().type(Cypress.env('password'))
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user is not redirected away from the login page
+    cy.url().should('include', '/login')
+  })
+
+  it('does not log in when email contains multiple @ symbols', () => {
+    // Visit the login page
+    cy.visit(Cypress.env('loginUrl'))
+
+    // Enter email with multiple '@' symbols
+    cy.get('#email').clear().type('user@@example.com')
+
+    // Enter valid password
+    cy.get('#password').clear().type(Cypress.env('password'))
+
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+
+    // Assert that login fails
+    // Expect a generic login error message
+    // Partial match to avoid brittleness if message copy changes slightly
+    cy.contains('Invalid username/password').should('be.visible')
+
+    // Confirm the user is not redirected away from the login page
+    cy.url().should('include', '/login')
+  })
+
   it('shows validation styling and message when login fields are blank', () => {
     // Visit the login page
     cy.visit(Cypress.env('loginUrl'))
