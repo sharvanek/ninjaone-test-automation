@@ -89,10 +89,19 @@ The test suite covers:
 
 - ✅ Successful login with valid credentials
 - ❌ Login failure scenarios including:
-  - Blank email/password fields
-  - Invalid email formats
-  - Incorrect username/password combinations
   - Excessively long input values for email and password
+  - Email blank, password filled
+  - Password blank, email filled
+  - Invalid email format with valid password
+  - Completely invalid credentials
+  - Valid email with invalid password
+  - Passwords that:
+     - Are shorter than 8 characters
+     - Contain only lowercase letters
+     - Contain only numbers
+     - Contain only special characters
+     - Include emojis
+     - Include spaces
 - Login with complex passwords
   - Passwords containing lowercase, uppercase, numbers, and special characters
 - 🎨 Validation styling and error messages
