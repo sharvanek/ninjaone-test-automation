@@ -80,8 +80,8 @@ You can also manually trigger the workflow from the GitHub Actions UI:
 
 1. Go to the **Actions** tab of the repository.
 2. Select the **Run Cypress Tests** workflow.
-3. Click the **Run workflow** button.
-4. Choose a branch and click **Run** to start the tests.
+3. Click the **Run workflow** dropdown.
+4. Choose a branch and click **Run workflow** to start the tests.
 
 ## ✅ Test Coverage
 
