@@ -143,6 +143,7 @@ The test suite covers:
 - Handling of trailing and leading whitespace in input fields
 - Testing email case sensitivity (e.g., mixed case emails)
 - Multi-factor authentication (MFA) workflows
+- Different user types (e.g., MSP vs. non-MSP)
 
 ## 🖐️ Manual Testing Recommendations
 
@@ -166,6 +167,6 @@ The test suite covers:
 - In a real environment, **all sensitive data** (e.g., usernames, passwords) should be supplied via **environment variables** and **GitHub Secrets** for security and flexibility.
 - Several test assumptions were made about the application’s behavior, including:
   - Password complexity requirements,
-  - Number of allowed login attempts before lockout,
+  - Landing Page Post-Login,
   - Error message formats, and more.
 - These assumptions should be verified and updated once access to an active account is provided.
