@@ -131,6 +131,8 @@ The test suite covers:
 
 - Cypress cannot simulate a full browser restart (limiting realistic session tests).
 - The login page shows a “Human Verification” error during Cypress tests because the backend detects automated traffic. Resolving this is outside the scope of this repository.
+- - Cypress supports testing on Chromium-based browsers (Chrome, Edge, Electron) and Firefox, but does not fully support Safari or Internet Explorer, limiting cross-browser testing coverage.
+
 
 ### 🔐 Notes on Credentials and Test Assumptions
 
