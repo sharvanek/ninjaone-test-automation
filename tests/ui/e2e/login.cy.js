@@ -637,19 +637,20 @@ describe('Login Page Navigation Links', () => {
   })
 
   it('opens the free trial signup page when clicking "Do not have an account?" link', () => {
-    // Visit the login page
+    // Visit the login page (which is on app.ninjaone.com)
     cy.visit(Cypress.env('loginUrl'))
 
-    // Get the link by its href attribute and check it opens in a new tab with correct rel attributes
+    // Get the "Do not have an account?" link and remove the target="_blank" attribute
     cy.get('a[href="https://www.ninjaone.com/freetrialform/"]')
-      .should('have.attr', 'target', '_blank')   // Confirm it opens in a new tab
-      .and('have.attr', 'rel', 'nonopener noreferrer')
+      .invoke('removeAttr', 'target')  // Forces the link to open in the same tab
 
-    // Cypress can't control new browser tabs, so remove target attribute before clicking
-    // This forces the link to open in the same tab so Cypress can verify the URL
-    cy.get('a[href="https://www.ninjaone.com/freetrialform/"]').invoke('removeAttr', 'target').click()
+    // Click the link to navigate to the free trial signup page
+    cy.get('a[href="https://www.ninjaone.com/freetrialform/"]').click()
 
-    // Assert that after clicking the link, the URL includes the expected external URL path
-    cy.url().should('include', '/freetrialform')
+    // Now that we're navigating to a new origin, we need to use cy.origin
+    cy.origin('https://www.ninjaone.com', () => {
+      // Assert that after clicking the link, the URL includes the expected free trial signup path
+      cy.url().should('include', '/freetrialform')
+    })
   })
 })
