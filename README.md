@@ -32,7 +32,7 @@ These are injected automatically in GitHub Actions using repository secrets.
 ├── config/                  # Environment JSON files (e.g., env.dev.json)
 ├── cypress/
 │   ├── fixtures/
-│   └── support/
+│ 
 ├── tests/
 │   ├── ui/
 │   └── e2e/
