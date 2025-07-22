@@ -549,8 +549,15 @@ describe('Login Session Persistence', () => {
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type(Cypress.env('password'))
 
-    // Enable "Keep me signed in" checkbox to persist session
-    cy.get('#staySignedIn').check()
+    // Click on the label that is associated with the checkbox
+    cy.get('label[for="staySignedIn"]')
+      .should('be.visible')            // Ensure the label is visible
+      .click()                         // Click the label (which clicks the checkbox input inside it)
+
+    // Assert that the checkbox is now checked
+    cy.get('#staySignedIn')
+      .should('be.checked')            // Assert that the checkbox input is checked
+      .and('not.be.disabled')          // Ensure that the checkbox isn't disabled
 
     // Submit the login form
     cy.get('button[type="submit"]').click()
@@ -567,15 +574,22 @@ describe('Login Session Persistence', () => {
   })
 
   it('keeps user logged in when revisiting login page if "Keep me signed in" is checked', () => {
-    // Visit login page
+    // Visit the login page
     cy.visit(Cypress.env('loginUrl'))
 
     // Enter valid credentials (from environment variables)
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type(Cypress.env('password'))
 
-    // Enable "Keep me signed in" checkbox to persist session
-    cy.get('#staySignedIn').check()
+    // Click on the label associated with the "Keep me signed in" checkbox
+    cy.get('label[for="staySignedIn"]')
+      .should('be.visible')            // Ensure the label is visible
+      .click()                         // Click the label (which clicks the checkbox input inside it)
+
+    // Assert that the checkbox is now checked
+    cy.get('#staySignedIn')
+      .should('be.checked')            // Assert that the checkbox input is checked
+      .and('not.be.disabled')          // Ensure that the checkbox isn't disabled
 
     // Submit the login form
     cy.get('button[type="submit"]').click()
