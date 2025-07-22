@@ -113,6 +113,19 @@ The test suite covers:
 - Navigation tests for login page links:
   - Clicking Forgot your password? routes to the password reset page
   - Clicking Do not have an account? opens the free trial signup page in a new tab (handled in the same tab for testability)
+ 
+## 🛠️ Tests Considered but Not Yet Automated
+
+- SQL injection attempts to verify input sanitization
+- JavaScript injection to test for XSS vulnerabilities
+- Account lockout behavior after multiple failed login attempts (blocking specific user accounts temporarily)
+- Rate limiting to control the frequency of login attempts or requests overall (usually by IP) to prevent abuse and brute-force attacks
+- Verification that the login URL uses HTTPS and is securely hosted
+- Accessibility checks for compliance with standards (e.g., WCAG)
+- Confirming error messages clear when input fields are edited
+- Handling of trailing and leading whitespace in input fields
+- Testing email case sensitivity (e.g., mixed case emails)
+- Multi-factor authentication (MFA) workflows
 
 ### ⚠️ Known Caveats and Considerations
 
