@@ -4,18 +4,63 @@ This repository contains an automated end-to-end (E2E) test suite for the [Ninja
 
 ---
 
-## ⚙️ Environment Setup
+## 📁 Project Structure
+This project structure is designed to showcase my thought process for building a well-organized and scalable test automation suite. While currently focused on Cypress and end-to-end tests, the organization can be easily adapted to support other testing frameworks and test types (e.g., unit, integration, API). The aim is to lay out a structure that facilitates maintainability, collaboration, and future expansion.
+```
+.
+├── config/                  # Environment configuration files (e.g., env.dev.json)
+├── cypress/
+│   ├── fixtures/            # Fixtures for mocking API responses or test data
+│ 
+├── tests/                   # Test specs organized by type
+│   ├── ui/                  # UI test suite (e.g., login, form validation)
+│   └── e2e/                 # End-to-end (E2E) test specs
+│       └── login.cy.js      # Login-related test specs
+├── .github/
+│   └── workflows/           # GitHub Actions CI/CD pipeline configuration
+│       └── cypress.yml      # GitHub Actions workflow
+├── cypress.config.js        # Cypress configuration file (including dynamic environment loading)
+└── README.md                # Project documentation and setup guide
+```
+
+## 🚀 Running Tests Locally
+To run the Cypress tests locally, follow the steps below:
+
+### 1. Clone the Repository
+Start by cloning the repository to your local machine.
+
+```bash
+git clone https://github.com/sharvanek/ninjaone-test-automation.git
+cd ninjaone-test-automation
+```
+
+### 2. Install Dependencies
+Next, install the necessary dependencies, including Cypress.
+
+```bash
+npm install
+```
+
+### 3. Environment Setup
 
 To run tests locally, you need to set up the configuration file for the environment.
 
-### Copy the Template:
+#### Copy the Template:
 Copy the `config/env.template.json` file to `config/env.dev.json`. This will be your configuration template for local development.
 
 ```bash
 cp config/env.template.json config/env.dev.json
 ```
 
-### Environment Variable Overrides (CI-Friendly)
+#### Edit the Config File:
+Open config/env.dev.json and provide the correct values for the following variables:
+
+- "baseUrl": Your base application URL.
+- "loginUrl": The login page URL.
+- "username": A valid username/email.
+- "password": A valid password.
+
+#### Environment Variable Overrides (CI-Friendly)
 
 You can override any of the above with environment variables:
 
@@ -26,37 +71,15 @@ You can override any of the above with environment variables:
 
 These are injected automatically in GitHub Actions using repository secrets.
 
-## 📁 Project Structure
-```
-.
-├── config/                  # Environment JSON files (e.g., env.dev.json)
-├── cypress/
-│   ├── fixtures/
-│   └── support/
-├── tests/
-│   ├── ui/
-│   └── e2e/
-│       └── login.cy.js      # Login-related test specs
-├── .github/
-│   └── workflows/
-│       └── cypress.yml      # GitHub Actions workflow
-├── cypress.config.js        # Cypress config with dynamic env loader
-└── README.md                # Project documentation
-```
+### 4. Run the Tests
 
-## 🚀 Running Tests Locally
-
-1. Install Dependencies
+#### Option 1: Running Tests Headlessly (CLI)
+You can run the tests in headless mode (without the Cypress UI) using the following command:
 ```bash
-npm install
+npx cypress run
 ```
-
-2. Run Tests Using Dev Environment
-```bash
-TEST_ENV=dev npx cypress run
-```
-
-Or open Cypress UI to run/debug interactively:
+#### Option 2: Running Tests with Cypress UI (Interactive Mode)
+If you prefer to run the tests interactively and view the Cypress UI, use this command:
 ```bash
 npx cypress open
 ```
@@ -81,8 +104,8 @@ You can also manually trigger the workflow from the GitHub Actions UI:
 
 The test suite covers:
 
-- ✅ Successful login with valid credentials
-- ❌ Login failure scenarios including:
+- Successful login with valid credentials
+- Login failure scenarios including:
   - Excessively long input values for email and password
   - Email blank, password filled
   - Password blank, email filled
@@ -98,8 +121,8 @@ The test suite covers:
      - Include spaces
 - Login with complex passwords
   - Passwords containing lowercase, uppercase, numbers, and special characters
-- 🎨 Validation styling and error messages
-- 🧪 Edge cases around input length limits
+- Validation styling and error messages
+- Edge cases around input length limits
 - Session persistence tests for "Keep me signed in" checkbox:
   - User remains logged in after page reload when "Keep me signed in" is checked
   - User remains logged in when revisiting the login page with "Keep me signed in" checked
