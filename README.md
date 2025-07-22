@@ -121,7 +121,7 @@ The test suite covers:
 - Account lockout behavior after multiple failed login attempts (blocking specific user accounts temporarily)
 - Rate limiting to control the frequency of login attempts or requests overall (usually by IP) to prevent abuse and brute-force attacks
 - Verification that the login URL uses HTTPS and is securely hosted
-- Accessibility checks for compliance with standards (e.g., WCAG)
+- Accessibility checks for compliance with standards
 - Confirming error messages clear when input fields are edited
 - Handling of trailing and leading whitespace in input fields
 - Testing email case sensitivity (e.g., mixed case emails)
