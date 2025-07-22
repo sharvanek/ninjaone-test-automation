@@ -35,19 +35,19 @@ These are injected automatically in GitHub Actions using repository secrets.
 ## 📁 Project Structure
 ```
 .
-├── config/ # Environment JSON files (e.g., env.dev.json)
+├── config/                  # Environment JSON files (e.g., env.dev.json)
 ├── cypress/
-│ ├── fixtures/
-│ └── support/ 
+│   ├── fixtures/
+│   └── support/
 ├── tests/
-│ └── ui/
-│ └── e2e/
-│ └── login.cy.js # Login-related test specs
+│   ├── ui/
+│   └── e2e/
+│       └── login.cy.js      # Login-related test specs
 ├── .github/
-│ └── workflows/
-│ └── cypress.yml # GitHub Actions workflow for running tests
-├── cypress.config.js # Cypress config with dynamic env loader
-└── README.md # Project documentation
+│   └── workflows/
+│       └── cypress.yml      # GitHub Actions workflow
+├── cypress.config.js        # Cypress config with dynamic env loader
+└── README.md                # Project documentation
 ```
 
 ## 🚀 Running Tests Locally
