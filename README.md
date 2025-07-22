@@ -127,6 +127,14 @@ The test suite covers:
 - Testing email case sensitivity (e.g., mixed case emails)
 - Multi-factor authentication (MFA) workflows
 
+## 🖐️ Manual Testing Recommendations
+
+- Visual/UI inspections: Subtle UI issues like layout inconsistencies, font rendering, and color contrasts often need human judgment.
+- Accessibility: While some automated checks exist, comprehensive accessibility testing (e.g., screen reader behavior) is best performed manually.
+- Session persistence: Tests involving session persistence (e.g., keeping the user logged in after a browser restart or system reboot) are best done manually, as Cypress cannot fully replicate these scenarios.
+- SQL injection and JavaScript injection: Security testing for vulnerabilities such as SQL injection or XSS attacks is best performed manually or with specialized security tools.
+- Performance testing: Load, stress, and performance testing generally require dedicated tools and manual setup beyond typical E2E tests.
+
 ### ⚠️ Known Caveats and Considerations
 
 - Cypress cannot simulate a full browser restart (limiting realistic session tests).
