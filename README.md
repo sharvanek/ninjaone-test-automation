@@ -4,16 +4,6 @@ This repository contains an automated end-to-end (E2E) test suite for the [Ninja
 
 ---
 
-## 2. Config File Setup (Required for Local Runs)
-
-To run tests locally, you need to set up the configuration file for the environment.
-
-### Copy the Template:
-Copy the `config/env.template.json` file to `config/env.dev.json`. This will be your configuration template for local development.
-
-```bash
-cp config/env.template.json config/env.dev.json
-
 ## ⚙️ Environment Setup
 
 To run tests locally, you need to set up the configuration file for the environment.
