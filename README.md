@@ -163,6 +163,7 @@ The test suite covers:
 ### 🔐 Notes on Credentials and Test Assumptions
 
 - This test suite was developed **before access was granted** to a valid NinjaOne account.
+- The **Password Reset Page** and **Trial Signup Page** were not explicitly tested as they were assumed to be out of scope based on the provided instructions, which focused only on testing the login page. However, it was verified that the links to these pages are accessible from the login page and can be reached via clicking the respective links ("Forgot your password?" and "Do not have an account?").
 - Some tests use **hardcoded usernames and passwords** as placeholders, which are expected to work once a real account is available.
 - In a real environment, **all sensitive data** (e.g., usernames, passwords) should be supplied via **environment variables** and **GitHub Secrets** for security and flexibility.
 - Several test assumptions were made about the application’s behavior, including:
