@@ -104,8 +104,8 @@ You can also manually trigger the workflow from the GitHub Actions UI:
 
 The test suite covers:
 
-- ✅ Successful login with valid credentials
-- ❌ Login failure scenarios including:
+- Successful login with valid credentials
+- Login failure scenarios including:
   - Excessively long input values for email and password
   - Email blank, password filled
   - Password blank, email filled
@@ -121,8 +121,8 @@ The test suite covers:
      - Include spaces
 - Login with complex passwords
   - Passwords containing lowercase, uppercase, numbers, and special characters
-- 🎨 Validation styling and error messages
-- 🧪 Edge cases around input length limits
+- Validation styling and error messages
+- Edge cases around input length limits
 - Session persistence tests for "Keep me signed in" checkbox:
   - User remains logged in after page reload when "Keep me signed in" is checked
   - User remains logged in when revisiting the login page with "Keep me signed in" checked
