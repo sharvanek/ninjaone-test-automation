@@ -1,6 +1,6 @@
 # 🧪 NinjaOne Test Automation (Cypress)
 
-This repository contains end-to-end (E2E) tests for the [NinjaOne](https://www.ninjaone.com/) web application using [Cypress](https://www.cypress.io/). The tests validate login functionality, input handling, and error scenarios. GitHub Actions is used for CI.
+This repository contains an automated end-to-end (E2E) test suite for the [NinjaOne](https://www.ninjaone.com/) web application, built with [Cypress](https://www.cypress.io/). It focuses on testing login functionality, input validation, session persistence, and error handling. Tests run locally or via CI using GitHub Actions.
 
 ---
 
@@ -119,7 +119,7 @@ The test suite covers:
 - Session persistence tests rely on Cypress behavior around cookies/local storage — simulating full browser close/open (e.g., new tab or browser restart) is limited within Cypress.
 - Human verification challenges (like CAPTCHAs) encountered during tests need manual intervention or advanced bypass solutions not covered here.
 
-### Notes on Credentials
+### 🔐 Notes on Credentials
 
 This test suite is prepared in advance of granted access to a valid account.
 
