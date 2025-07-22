@@ -6,3 +6,7 @@ node_modules/
 
 # Track the config template file
 !config/env.template.json
+
+# Ignore screenshots and downloads
+/cypress/screenshots/
+/cypress/downloads/
