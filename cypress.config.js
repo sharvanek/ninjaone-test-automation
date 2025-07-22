@@ -22,6 +22,7 @@ function loadEnvConfig(envName) {
 
 module.exports = defineConfig({
   e2e: {
+    supportFile: false,
     setupNodeEvents(on, config) {
       // Determine environment (local or CI)
       const env = process.env.TEST_ENV || 'dev'
