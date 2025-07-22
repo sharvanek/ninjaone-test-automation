@@ -27,21 +27,22 @@ You can override any of the above with environment variables:
 These are injected automatically in GitHub Actions using repository secrets.
 
 ## 📁 Project Structure
+This project structure is designed to showcase my thought process for building a well-organized and scalable test automation suite. While currently focused on Cypress and end-to-end tests, the organization can be easily adapted to support other testing frameworks and test types (e.g., unit, integration, API). The aim is to lay out a structure that facilitates maintainability, collaboration, and future expansion.
 ```
 .
-├── config/                  # Environment JSON files (e.g., env.dev.json)
+├── config/                  # Environment configuration files (e.g., env.dev.json)
 ├── cypress/
-│   ├── fixtures/
+│   ├── fixtures/            # Fixtures for mocking API responses or test data
 │ 
-├── tests/
-│   ├── ui/
-│   └── e2e/
+├── tests/                   # Test specs organized by type
+│   ├── ui/                  # UI test suite (e.g., login, form validation)
+│   └── e2e/                 # End-to-end (E2E) test specs
 │       └── login.cy.js      # Login-related test specs
 ├── .github/
-│   └── workflows/
+│   └── workflows/           # GitHub Actions CI/CD pipeline configuration
 │       └── cypress.yml      # GitHub Actions workflow
-├── cypress.config.js        # Cypress config with dynamic env loader
-└── README.md                # Project documentation
+├── cypress.config.js        # Cypress configuration file (including dynamic environment loading)
+└── README.md                # Project documentation and setup guide
 ```
 
 ## 🚀 Running Tests Locally
