@@ -4,28 +4,6 @@ This repository contains an automated end-to-end (E2E) test suite for the [Ninja
 
 ---
 
-## ⚙️ Environment Setup
-
-To run tests locally, you need to set up the configuration file for the environment.
-
-### Copy the Template:
-Copy the `config/env.template.json` file to `config/env.dev.json`. This will be your configuration template for local development.
-
-```bash
-cp config/env.template.json config/env.dev.json
-```
-
-### Environment Variable Overrides (CI-Friendly)
-
-You can override any of the above with environment variables:
-
-- `CYPRESS_BASE_URL`
-- `CYPRESS_LOGIN_URL`
-- `CYPRESS_USERNAME`
-- `CYPRESS_PASSWORD`
-
-These are injected automatically in GitHub Actions using repository secrets.
-
 ## 📁 Project Structure
 This project structure is designed to showcase my thought process for building a well-organized and scalable test automation suite. While currently focused on Cypress and end-to-end tests, the organization can be easily adapted to support other testing frameworks and test types (e.g., unit, integration, API). The aim is to lay out a structure that facilitates maintainability, collaboration, and future expansion.
 ```
@@ -46,18 +24,62 @@ This project structure is designed to showcase my thought process for building a
 ```
 
 ## 🚀 Running Tests Locally
+To run the Cypress tests locally, follow the steps below:
 
-1. Install Dependencies
+### 1. Clone the Repository
+Start by cloning the repository to your local machine.
+
+```bash
+git clone https://github.com/sharvanek/ninjaone-test-automation.git
+cd ninjaone-test-automation
+```
+
+### 2. Install Dependencies
+Next, install the necessary dependencies, including Cypress.
+
 ```bash
 npm install
 ```
 
-2. Run Tests Using Dev Environment
+### 3. Environment Setup
+
+To run tests locally, you need to set up the configuration file for the environment.
+
+#### Copy the Template:
+Copy the `config/env.template.json` file to `config/env.dev.json`. This will be your configuration template for local development.
+
 ```bash
-TEST_ENV=dev npx cypress run
+cp config/env.template.json config/env.dev.json
 ```
 
-Or open Cypress UI to run/debug interactively:
+#### Edit the Config File:
+Open config/env.dev.json and provide the correct values for the following variables:
+
+- "baseUrl": Your base application URL.
+- "loginUrl": The login page URL.
+- "username": A valid username/email.
+- "password": A valid password.
+
+#### Environment Variable Overrides (CI-Friendly)
+
+You can override any of the above with environment variables:
+
+- `CYPRESS_BASE_URL`
+- `CYPRESS_LOGIN_URL`
+- `CYPRESS_USERNAME`
+- `CYPRESS_PASSWORD`
+
+These are injected automatically in GitHub Actions using repository secrets.
+
+### 4. Run the Tests
+
+#### Option 1: Running Tests Headlessly (CLI)
+You can run the tests in headless mode (without the Cypress UI) using the following command:
+```bash
+npx cypress run
+```
+#### Option 2: Running Tests with Cypress UI (Interactive Mode)
+If you prefer to run the tests interactively and view the Cypress UI, use this command:
 ```bash
 npx cypress open
 ```
