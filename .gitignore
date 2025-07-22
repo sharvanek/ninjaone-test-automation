@@ -1,1 +1,8 @@
+# Ignore the node_modules directory
 node_modules/
+
+# Ignore the actual config file to prevent exposing credentials
+/config/env.dev.json
+
+# Track the config template file
+!config/env.template.json
