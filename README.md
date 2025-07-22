@@ -116,15 +116,16 @@ The test suite covers:
 
 ### ⚠️ Known Caveats and Considerations
 
-- Session persistence tests rely on Cypress behavior around cookies/local storage — simulating full browser close/open (e.g., new tab or browser restart) is limited within Cypress.
-- Human verification challenges (like CAPTCHAs) encountered during tests need manual intervention or advanced bypass solutions not covered here.
+- Cypress cannot simulate a full browser restart (limiting realistic session tests).
+- The login page shows a “Human Verification” error during Cypress tests because the backend detects automated traffic. Resolving this is outside the scope of this repository.
 
-### 🔐 Notes on Credentials
+### 🔐 Notes on Credentials and Test Assumptions
 
-This test suite is prepared in advance of granted access to a valid account.
-
-- The login tests currently use hardcoded credentials (especially the password) as placeholders.
-- An account has been registered, but access is pending approval.
-- Once valid credentials are provided, tests should be updated to use environment variables
-  (e.g., `CYPRESS_USERNAME`, `CYPRESS_PASSWORD`) to improve security and ease of configuration.
-- This approach ensures the test suite remains ready for immediate use when access is granted.
+- This test suite was developed **before access was granted** to a valid NinjaOne account.
+- Some tests use **hardcoded usernames and passwords** as placeholders, which are expected to work once a real account is available.
+- In a real environment, **all sensitive data** (e.g., usernames, passwords) should be supplied via **environment variables** and **GitHub Secrets** for security and flexibility.
+- Several test assumptions were made about the application’s behavior, including:
+  - Password complexity requirements,
+  - Number of allowed login attempts before lockout,
+  - Error message formats, and more.
+- These assumptions should be verified and updated once access to an active account is provided.
